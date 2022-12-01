@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
 import com.liu966.nycschools.data.DataManager;
 import com.liu966.nycschools.data.domain.School;
+import com.liu966.nycschools.data.model.SATQueryResult;
 import com.liu966.nycschools.data.repository.SchoolRepository;
 import com.liu966.nycschools.databinding.ActivityMainBinding;
 import com.liu966.nycschools.ui.base.BaseActivity;
@@ -53,16 +54,23 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     viewModel.getSchoolsLiveData().observe(this, schools -> adapter.setItems(schools));
 
     viewModel.getNavigateToDetailsLiveData().observe(this, school -> {
-      // Will show details in next step
-      Toast.makeText(getApplicationContext(), school.getSchoolName(), Toast.LENGTH_SHORT).show();
+      viewModel.loadSATScores(school.getDbn());
     });
 
     viewModel.getShowErrorMessageLiveData().observe(this,
         message -> Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show());
+
+    viewModel.getSatScoreLiveData().observe(this, this::displaySATScores);
   }
 
   @Override
   public void onSchoolClicked(School school) {
     viewModel.onSchoolClicked(school);
+  }
+
+  private void displaySATScores(SATQueryResult result) {
+    // Next step: display all SAT scores
+    Toast.makeText(getApplicationContext(), result.getSat_math_avg_score(), Toast.LENGTH_SHORT)
+        .show();
   }
 }

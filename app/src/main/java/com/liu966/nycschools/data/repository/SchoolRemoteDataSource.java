@@ -3,6 +3,8 @@ package com.liu966.nycschools.data.repository;
 import com.liu966.nycschools.data.api.NYCSchoolsAPI;
 import com.liu966.nycschools.data.domain.School;
 import com.liu966.nycschools.data.model.NYCSchool;
+import com.liu966.nycschools.data.model.SATQueryResult;
+import com.liu966.nycschools.data.repository.SchoolRepository.LoadSchoolSATScoreCallback;
 import com.liu966.nycschools.data.repository.SchoolRepository.LoadSchoolsCallback;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +50,26 @@ public class SchoolRemoteDataSource implements SchoolDataSource {
 
       @Override
       public void onFailure(Call<List<NYCSchool>> call, Throwable t) {
+        callback.onError(t.getLocalizedMessage());
+      }
+    });
+  }
+
+  @Override
+  public void getSchoolSATScores(String dbn, LoadSchoolSATScoreCallback callback) {
+    schoolsAPI.getSATScores(dbn).enqueue(new Callback<List<SATQueryResult>>() {
+      @Override
+      public void onResponse(Call<List<SATQueryResult>> call,
+          Response<List<SATQueryResult>> response) {
+        if (response.body() != null && !response.body().isEmpty()) {
+          callback.onScoreLoaded(response.body().get(0));
+        } else {
+          callback.onDataNotAvailable();
+        }
+      }
+
+      @Override
+      public void onFailure(Call<List<SATQueryResult>> call, Throwable t) {
         callback.onError(t.getLocalizedMessage());
       }
     });
