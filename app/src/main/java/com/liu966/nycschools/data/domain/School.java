@@ -5,8 +5,8 @@ package com.liu966.nycschools.data.domain;
  */
 public class School {
 
-  public String dbn;
-  public String school_name;
+  private String dbn;
+  private String school_name;
 
   public School(String dbn, String school_name) {
     this.dbn = dbn;
@@ -21,11 +21,11 @@ public class School {
     this.dbn = dbn;
   }
 
-  public String getSchool_name() {
+  public String getSchoolName() {
     return school_name;
   }
 
-  public void setSchool_name(String school_name) {
+  public void setSchoolName(String school_name) {
     this.school_name = school_name;
   }
 }

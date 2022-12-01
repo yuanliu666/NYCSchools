@@ -18,7 +18,7 @@ public class SchoolRepositoryImpl implements SchoolRepository {
   }
 
   @Override
-  public void getMovies(LoadSchoolsCallback callback) {
+  public void getSchools(LoadSchoolsCallback callback) {
     if (callback == null) {
       return;
     }

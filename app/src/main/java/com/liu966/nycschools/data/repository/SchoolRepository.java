@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface SchoolRepository {
 
-  void getMovies(LoadSchoolsCallback callback);
+  void getSchools(LoadSchoolsCallback callback);
 
   interface LoadSchoolsCallback {
 
