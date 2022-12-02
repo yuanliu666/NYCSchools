@@ -11,7 +11,7 @@
 
 - Retrofit
 - Gson
-- Jetpack Lifecycle
+- Live data
 - Recycler view
 - Android material dialog
 
