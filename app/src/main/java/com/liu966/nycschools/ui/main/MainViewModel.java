@@ -93,7 +93,7 @@ public class MainViewModel extends BaseViewModel {
     @Override
     public void onDataNotAvailable() {
       setIsLoading(false);
-      showErrorMessageLiveData.postValue("Cannot get data");
+      showErrorMessageLiveData.postValue("Data not available");
     }
 
     @Override

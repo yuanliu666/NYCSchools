@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.liu966.nycschools.R;
 import com.liu966.nycschools.data.DataManager;
 import com.liu966.nycschools.data.domain.School;
 import com.liu966.nycschools.data.model.SATQueryResult;
@@ -69,8 +71,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
   }
 
   private void displaySATScores(SATQueryResult result) {
-    // Next step: display all SAT scores
-    Toast.makeText(getApplicationContext(), result.getSat_math_avg_score(), Toast.LENGTH_SHORT)
+    new MaterialAlertDialogBuilder(this)
+        .setTitle(R.string.sat_dialog_title)
+        .setMessage(getString(R.string.sat_dialog_content, result.getSchool_name(),
+            result.getSat_critical_reading_avg_score(),
+            result.getSat_math_avg_score(),
+            result.getSat_writing_avg_score()))
+        .setNegativeButton(android.R.string.ok, (dialogInterface, i) -> dialogInterface.dismiss())
         .show();
   }
 }

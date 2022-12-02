@@ -2,4 +2,6 @@
     <string name="app_name">NYCSchools</string>
     <string name="load_schools">Load schools</string>
     <string name="empty_data">Empty data</string>
+    <string name="sat_dialog_title">SAT scores</string>
+    <string name="sat_dialog_content">School name: %1$s, Critical Reading Avg Score: %2$s, Math Avg Score: %3$s, Writing Avg Score: %4$s</string>
 </resources>
